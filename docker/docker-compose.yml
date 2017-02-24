@@ -1,0 +1,49 @@
+version: '2'
+
+services:
+  elasticsearch:
+    build: elasticsearch/
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+    networks:
+      - elk
+  logstash:
+    build: logstash/
+    ports:
+      - "5000:5000"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+  kibana:
+    build: kibana/
+    ports:
+      - "5601:5601"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+  kafka:
+    build: kafka/
+    ports:
+      - "2181:2181"
+      - "9092:9092"
+    environment:
+      ADVERTISED_HOST: "localhost"
+      ADVERTISED_PORT: "9092"
+    #command: /opt/kafka_2.11-0.10.1.0/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test && /opt/kafka_2.11-0.10.1.0/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test
+    networks: 
+      - elk
+  app:
+    build: app/
+    ports:
+      - "93:8000"
+    networks:
+      - elk
+
+networks:
+  elk:
+    driver: bridge
