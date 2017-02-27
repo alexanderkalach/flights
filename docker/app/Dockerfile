@@ -22,5 +22,3 @@ RUN pip install Django
  #   --daemonize=/usr/local/var/log/uwsgi/myapp.log
 
 COPY nginx.conf /etc/nginx/nginx.conf
-
-#RUN service nginx start

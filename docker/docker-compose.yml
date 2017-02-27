@@ -43,6 +43,9 @@ services:
       - "93:8000"
     networks:
       - elk
+    volumes: 
+      - ../app:/var/app
+    command: /bin/bash -c "uwsgi --socket :8001 --chdir /var/app/ --wsgi-file flights/wsgi.py & service nginx start & nginx -g 'daemon off;'"
 
 networks:
   elk:
