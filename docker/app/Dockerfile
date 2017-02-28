@@ -6,6 +6,8 @@ RUN pip install uwsgi
 RUN apt-get install -y nginx
 
 RUN pip install Django
+#RUN pip install confluent-kafka
+RUN pip install kafka-python
 
 #RUN  uwsgi --socket :8001 --chdir /var/app/ --wsgi-file flights/wsgi.py
 #RUN uwsgi \
