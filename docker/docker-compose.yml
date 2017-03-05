@@ -11,7 +11,7 @@ services:
     networks:
       - elk
     depends_on: 
-      - logstash
+      - kafka
   logstash:
     build: logstash/
     ports:
@@ -19,7 +19,7 @@ services:
     networks:
       - elk
     depends_on:
-      - kafka
+      - kibana
   kibana:
     build: kibana/
     ports:
@@ -34,7 +34,7 @@ services:
       - "2181:2181"
       - "9092:9092"
     environment:
-      ADVERTISED_HOST: "localhost"
+      ADVERTISED_HOST: "kafka"
       ADVERTISED_PORT: "9092"
     networks: 
       - elk
@@ -47,6 +47,8 @@ services:
     volumes: 
       - ../app:/var/app
     command: /bin/bash -c "uwsgi --socket :8001 --chdir /var/app/ --wsgi-file flights/wsgi.py & sleep 10 && service nginx start & nginx -g 'daemon off;'"
+    depends_on: 
+      - logstash
 
 networks:
   elk:

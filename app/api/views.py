@@ -5,7 +5,7 @@ from kafka import KafkaProducer
 
 
 def index(request):
-    producer = KafkaProducer(bootstrap_servers='localhost:9092')
-    for _ in range(100):
-        producer.send('test', b'some_message_bytes')
+    producer = KafkaProducer(bootstrap_servers='kafka:9092', api_version=(0,10))
+    
+    producer.send('test', b'some_message_bytes')
     return HttpResponse("Hey")
