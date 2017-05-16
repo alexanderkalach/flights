@@ -46,7 +46,7 @@ services:
       - elk
     volumes: 
       - ../app:/var/app
-    command: /bin/bash -c "uwsgi --socket :8001 --chdir /var/app/ --wsgi-file flights/wsgi.py & sleep 10 && service nginx start & nginx -g 'daemon off;'"
+    command: /bin/bash -c "uwsgi --socket :8001 --chdir /var/app/ --wsgi-file travel/wsgi.py & sleep 10 && service nginx start & nginx -g 'daemon off;'"
     depends_on: 
       - logstash
 

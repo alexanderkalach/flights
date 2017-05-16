@@ -9,9 +9,9 @@ RUN pip install Django
 #RUN pip install confluent-kafka
 RUN pip install kafka-python
 
-#RUN  uwsgi --socket :8001 --chdir /var/app/ --wsgi-file flights/wsgi.py
+#RUN  uwsgi --socket :8001 --chdir /var/app/ --wsgi-file travel/wsgi.py
 #RUN uwsgi \
- #   --chdir=/var/app/flights \
+ #   --chdir=/var/app/travel \
  #   --module=myapp.wsgi:application \
  #   --env DJANGO_SETTINGS_MODULE=myapp.settings \
  #   --master --pidfile=/usr/local/var/run/uwsgi/project-master.pid \
