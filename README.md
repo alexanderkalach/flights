@@ -1,1 +1,1 @@
-# flights
+# Web interface for the travel application
